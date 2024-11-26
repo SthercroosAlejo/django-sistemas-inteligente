@@ -1,16 +1,16 @@
 # example/views.py
 from datetime import datetime
-
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 def index(request):
+    # Obtener la fecha y hora actuales
     now = datetime.now()
-    html = f'''
-    <html>
-        <body>
-            <h1>Hello from Vercel!</h1>
-            <p>The current time is { now }.</p>
-        </body>
-    </html>
-    '''
-    return HttpResponse(html)
+
+    # Formatear la respuesta en JSON
+    data = {
+        "time": now.strftime("%H:%M:%S"),  # Hora en formato HH:MM:SS
+        "day": now.strftime("%A"),  # Día de la semana completo (ejemplo: Monday)
+        "full_date": now.strftime("%Y-%m-%d"),  # Fecha completa en formato YYYY-MM-DD
+    }
+
+    return JsonResponse(data)
